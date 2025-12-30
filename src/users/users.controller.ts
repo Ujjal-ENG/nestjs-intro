@@ -5,6 +5,7 @@ import {
   Headers,
   Ip,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
   Query,
@@ -12,8 +13,12 @@ import {
 
 @Controller('users')
 export class UsersController {
-  @Get()
-  public getUsers(@Query('name') name: string) {
+  @Get('/:id')
+  public getUsers(
+    @Query('name') name: string,
+    @Param('id', ParseIntPipe) id: number | undefined,
+  ) {
+    console.log(typeof id);
     return `User get method and the name is ${name}`;
   }
 
