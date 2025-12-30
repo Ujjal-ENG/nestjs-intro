@@ -13,7 +13,12 @@ export class UsersController {
   }
 
   @Patch('/:id')
-  public getUserById(@Param() params: { id: string }) {
-    return `This method for patricular user like: ${params?.id}`;
+  public getUserById(@Param('id') id: string) {
+    return `This method for particular user like: ${id}`;
+  }
+
+  @Get('/:id/:optional')
+  public getUserbyGet(@Param() params: any) {
+    console.log(params);
   }
 }
