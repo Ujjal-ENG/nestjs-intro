@@ -1,4 +1,12 @@
-import { Controller, Get, Param, Patch, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Query,
+} from '@nestjs/common';
 
 @Controller('users')
 export class UsersController {
@@ -8,7 +16,8 @@ export class UsersController {
   }
 
   @Post()
-  public createUser() {
+  public createUser(@Body() request: any) {
+    console.log(request);
     return 'This method only for create users!!';
   }
 
