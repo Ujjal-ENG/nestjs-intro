@@ -2,6 +2,8 @@ import {
   Body,
   Controller,
   Get,
+  Headers,
+  Ip,
   Param,
   Patch,
   Post,
@@ -16,8 +18,12 @@ export class UsersController {
   }
 
   @Post()
-  public createUser(@Body() request: any) {
-    console.log(request);
+  public createUser(
+    @Body() request: any,
+    @Headers() headers: any,
+    @Ip() ip: any,
+  ) {
+    console.log(ip);
     return 'This method only for create users!!';
   }
 
