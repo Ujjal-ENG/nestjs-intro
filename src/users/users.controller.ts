@@ -1,10 +1,10 @@
-import { Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import { Controller, Get, Param, Patch, Post, Query } from '@nestjs/common';
 
 @Controller('users')
 export class UsersController {
   @Get()
-  public getUsers() {
-    return 'Users get method';
+  public getUsers(@Query('name') name: string) {
+    return `User get method and the name is ${name}`;
   }
 
   @Post()
@@ -15,10 +15,5 @@ export class UsersController {
   @Patch('/:id')
   public getUserById(@Param('id') id: string) {
     return `This method for particular user like: ${id}`;
-  }
-
-  @Get('/:id/:optional')
-  public getUserbyGet(@Param() params: any) {
-    console.log(params);
   }
 }
