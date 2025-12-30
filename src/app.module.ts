@@ -3,13 +3,8 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
-/*
- * User created modules
- */
-import { UsersModule } from '../users/users.module';
-
 @Module({
-  imports: [UsersModule],
+  imports: [],
   controllers: [AppController],
   providers: [AppService],
 })
