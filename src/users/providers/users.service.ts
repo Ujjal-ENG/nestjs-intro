@@ -79,9 +79,9 @@ export class UsersService {
     return this.Users;
   }
 
-  public getUserByEmail(email: string) {
-    console.log(email);
-    const user = this.Users.find((user) => user?.email == email);
+  public getUserById(id: string | number) {
+    console.log(id);
+    const user = this.Users.find((user) => user?.id == id);
     return user;
   }
 }
