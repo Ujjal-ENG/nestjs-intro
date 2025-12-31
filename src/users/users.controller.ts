@@ -13,9 +13,9 @@ export class UsersController {
     return this.userService.getAllUsers(getUserParamDto);
   }
 
-  @Get('/:id')
-  public getUserById(@Param('id') id: string | number) {
-    return 'user';
+  @Get('/:email')
+  public getUserByEmail(@Param('email') email: string) {
+    return this.getUserByEmail(email);
   }
 
   @Post()
