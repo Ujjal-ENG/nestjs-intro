@@ -20,7 +20,7 @@ export class UsersController {
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
     @Param('id', ParseIntPipe) id: number | undefined,
   ) {
-    console.log(limit);
+    console.log(limit, id);
     return `User get method and the name is ${name}`;
   }
 
