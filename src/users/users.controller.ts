@@ -2,13 +2,20 @@ import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { GetUsersParamDto } from './dtos/get-users-param.dto';
 import { PatchUserDto } from './dtos/patch-user.dto';
+import { UsersService } from './providers/users.service';
 
 @Controller('users')
 export class UsersController {
+  constructor(private readonly userService: UsersService) {}
+
   @Get()
-  public getUsers(@Param() getUserParamDto: GetUsersParamDto) {
-    console.log(getUserParamDto);
-    return `User get method`;
+  public getAllUsers(@Param() getUserParamDto: GetUsersParamDto) {
+    return this.userService.getAllUsers(getUserParamDto);
+  }
+
+  @Get('/:id')
+  public getUserById(@Param('id') id: string | number) {
+    return 'user';
   }
 
   @Post()
