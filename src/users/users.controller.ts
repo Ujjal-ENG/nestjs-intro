@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  DefaultValuePipe,
   Get,
   Headers,
   Ip,
@@ -16,9 +17,10 @@ export class UsersController {
   @Get('/:id')
   public getUsers(
     @Query('name') name: string,
+    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
     @Param('id', ParseIntPipe) id: number | undefined,
   ) {
-    console.log(typeof id);
+    console.log(limit);
     return `User get method and the name is ${name}`;
   }
 
