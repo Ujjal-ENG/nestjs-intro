@@ -13,4 +13,14 @@ async function bootstrap() {
   );
   await app.listen(process.env.PORT ?? 3000);
 }
-bootstrap();
+
+bootstrap()
+  .then(() => {
+    console.log('This app is running perfectly!!');
+  })
+  .catch((error) => {
+    console.log(
+      'This app has some problem for handling the async code!!',
+      error,
+    );
+  });
