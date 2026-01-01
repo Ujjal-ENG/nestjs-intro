@@ -214,8 +214,8 @@ export class UsersService {
   }
 
   public getUserById(id: string | number) {
-    console.log(id);
     const user = this.Users.find((user) => user?.id == id);
+    if (user?.id == undefined) return 'User Not Found!!';
     return user;
   }
 }

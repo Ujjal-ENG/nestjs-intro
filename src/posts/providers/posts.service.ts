@@ -17,7 +17,8 @@ export class PostsService {
   }
 
   findPostForUser(userId: number) {
-    return `This action returns a #${userId} post`;
+    const user = this.userService.getUserById(userId);
+    return user;
   }
 
   update(id: number, updatePostDto: UpdatePostDto) {
