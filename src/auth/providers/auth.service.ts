@@ -1,13 +1,24 @@
 import { Injectable } from '@nestjs/common';
+import { UsersService } from '../../users/providers/users.service';
 import { CreateAuthDto } from '../dto/create-auth.dto';
 import { UpdateAuthDto } from '../dto/update-auth.dto';
 
 @Injectable()
 export class AuthService {
+  constructor(private readonly userService: UsersService) {}
   create(createAuthDto: CreateAuthDto) {
     return 'This action adds a new auth';
   }
 
+  login(email: string, password: string, id: string) {
+    const user = this.userService.getUserById(4);
+
+    return 'simple token';
+  }
+
+  isAuth() {
+    return true;
+  }
   findAll() {
     return `This action returns all auth`;
   }
