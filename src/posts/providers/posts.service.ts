@@ -12,8 +12,8 @@ export class PostsService {
     return `This action returns all posts`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} post`;
+  findPostForUser(userId: number) {
+    return `This action returns a #${userId} post`;
   }
 
   update(id: number, updatePostDto: UpdatePostDto) {
