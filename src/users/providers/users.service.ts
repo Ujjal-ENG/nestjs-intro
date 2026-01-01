@@ -1,8 +1,14 @@
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
+import { AuthService } from '../../auth/providers/auth.service';
 import { GetUsersParamDto } from '../dtos/get-users-param.dto';
 
 @Injectable()
 export class UsersService {
+  constructor(
+    @Inject(forwardRef(() => AuthService))
+    private readonly authService: AuthService,
+  ) {}
+
   private readonly Users = [
     {
       id: 1,
@@ -214,6 +220,8 @@ export class UsersService {
   }
 
   public getUserById(id: string | number) {
+    const isAuth = this.authService.isAuth();
+    console.log(isAuth);
     const user = this.Users.find((user) => user?.id == id);
     if (user?.id == undefined) return 'User Not Found!!';
     return user;
