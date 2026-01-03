@@ -9,6 +9,7 @@ export class PostsService {
   constructor(private readonly userService: UsersService) {}
 
   create(createPostDto: CreatePostDto) {
+    console.log(createPostDto);
     return 'This action adds a new post';
   }
 
@@ -21,8 +22,9 @@ export class PostsService {
     return user;
   }
 
-  update(id: number, updatePostDto: UpdatePostDto) {
-    return `This action updates a #${id} post`;
+  update(updatePostDto: UpdatePostDto) {
+    console.log(updatePostDto);
+    return `This action updates a #${updatePostDto?.id} post`;
   }
 
   remove(id: number) {

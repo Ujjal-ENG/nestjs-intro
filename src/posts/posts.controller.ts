@@ -30,9 +30,9 @@ export class PostsController {
     return this.postsService.findPostForUser(+userId);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePostDto: UpdatePostDto) {
-    return this.postsService.update(+id, updatePostDto);
+  @Patch('/:id')
+  update(@Body() updatePostDto: UpdatePostDto) {
+    return this.postsService.update(updatePostDto);
   }
 
   @Delete(':id')
