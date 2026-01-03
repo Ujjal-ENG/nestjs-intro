@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { GetUsersParamDto } from './dtos/get-users-param.dto';
 import { PatchUserDto } from './dtos/patch-user.dto';
@@ -9,6 +10,15 @@ export class UsersController {
   constructor(private readonly userService: UsersService) {}
 
   @Get()
+  @ApiOperation({
+    summary: 'This api return all the users',
+  })
+  @ApiResponse({
+    status: 200,
+    isArray: true,
+    description: 'Array of object is return!!',
+    headers: {},
+  })
   public getAllUsers(@Param() getUserParamDto: GetUsersParamDto) {
     return this.userService.getAllUsers(getUserParamDto);
   }
