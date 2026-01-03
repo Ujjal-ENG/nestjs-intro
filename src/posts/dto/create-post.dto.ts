@@ -1,17 +1,21 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
 import {
   IsArray,
   IsDate,
   IsEnum,
   IsObject,
+  IsOptional,
   IsString,
   IsUrl,
+  Matches,
   MaxLength,
   MinLength,
+  ValidateNested,
 } from 'class-validator';
 import { postStatus } from '../enums/postStatus.enum';
 import { postType } from '../enums/postType.enum';
-
+import { CreateMetaOptionsDto } from './create-post-meta-options.dto';
 export class CreatePostDto {
   @ApiProperty({
     description: 'The title of the post',
@@ -31,16 +35,13 @@ export class CreatePostDto {
   })
   @IsEnum(postType)
   postType: postType;
-
   @ApiProperty({
     description: 'The slug of the post',
     example: 'my-post-title',
-    minLength: 3,
-    maxLength: 50,
+    pattern: '^[a-z0-9-]+$',
   })
   @IsString()
-  @MinLength(3)
-  @MaxLength(50)
+  @Matches(/^[a-z0-9-]+$/, { message: 'Invalid slug format' })
   slug: string;
 
   @ApiProperty({
@@ -99,7 +100,7 @@ export class CreatePostDto {
   })
   @IsArray()
   @IsString({ each: true })
-  @MinLength(1)
+  @MinLength(3, { each: true })
   @MaxLength(10)
   tags?: string[];
 
@@ -113,7 +114,10 @@ export class CreatePostDto {
     ],
     isArray: true,
   })
+  @IsOptional()
   @IsArray()
   @IsObject()
-  metaOptions: { key: 'sidebarEnabled'; value: true }[];
+  @ValidateNested({ each: true })
+  @Type(() => CreateMetaOptionsDto)
+  metaOptions: CreateMetaOptionsDto[];
 }
