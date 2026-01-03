@@ -2,9 +2,8 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import {
   IsArray,
-  IsDate,
   IsEnum,
-  IsObject,
+  IsISO8601,
   IsOptional,
   IsString,
   IsUrl,
@@ -71,9 +70,7 @@ export class CreatePostDto {
     minLength: 10,
     maxLength: 1000,
   })
-  @IsString()
-  @MinLength(10)
-  @MaxLength(1000)
+  @IsOptional()
   schema?: string;
 
   @ApiProperty({
@@ -88,7 +85,8 @@ export class CreatePostDto {
     description: 'The published date of the post',
     example: '2022-01-01T00:00:00.000Z',
   })
-  @IsDate()
+  @IsISO8601()
+  @IsOptional()
   publishedOn: Date;
 
   @ApiProperty({
@@ -101,7 +99,7 @@ export class CreatePostDto {
   @IsArray()
   @IsString({ each: true })
   @MinLength(3, { each: true })
-  @MaxLength(10)
+  @MaxLength(20, { each: true })
   tags?: string[];
 
   @ApiProperty({
@@ -116,7 +114,6 @@ export class CreatePostDto {
   })
   @IsOptional()
   @IsArray()
-  @IsObject()
   @ValidateNested({ each: true })
   @Type(() => CreateMetaOptionsDto)
   metaOptions: CreateMetaOptionsDto[];
